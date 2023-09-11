@@ -24,3 +24,8 @@ internal var Context.isFoldRequestHeaders: Boolean
 internal var Context.isFoldResponseHeaders: Boolean
     get() = sp.getBoolean("isFoldResponseHeaders", true)
     set(value) = sp.edit().putBoolean("isFoldResponseHeaders", value).apply()
+
+// 是否在Logcat打印请求日志信息
+internal var Context.isPrintNetworkLog: Boolean
+    get() = sp.getBoolean("isPrintNetworkLog", true)
+    set(value) = sp.edit().putBoolean("isPrintNetworkLog", value).apply()

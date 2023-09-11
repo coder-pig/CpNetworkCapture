@@ -13,6 +13,7 @@ import cn.coderpig.cp_network_capture.R
 import cn.coderpig.cp_network_capture.databinding.ActivityConfigSettingBinding
 import cn.coderpig.cp_network_capture.databinding.ActivityTextSearchBinding
 import cn.coderpig.cp_network_capture.utils.*
+import cn.coderpig.cp_network_capture.utils.LogHelper.TAG
 import cn.coderpig.cp_network_capture.utils.binding
 import cn.coderpig.cp_network_capture.utils.getColorRes
 import java.util.regex.PatternSyntaxException

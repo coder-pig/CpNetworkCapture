@@ -19,6 +19,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewbinding.ViewBinding
 import cn.coderpig.cp_network_capture.R
+import cn.coderpig.cp_network_capture.utils.LogHelper.TAG
 import java.io.Serializable
 
 /**

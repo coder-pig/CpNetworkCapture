@@ -1,12 +1,12 @@
 package cn.coderpig.cp_network_capture.provider
 
+import NetworkCapture
 import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 import android.util.Log
-import cn.coderpig.cp_network_capture.db.NetworkLogDao
-import cn.coderpig.cp_network_capture.utils.TAG
+import cn.coderpig.cp_network_capture.utils.LogHelper.TAG
 
 /**
  * Author: zpj

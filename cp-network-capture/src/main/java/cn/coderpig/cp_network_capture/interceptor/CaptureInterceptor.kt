@@ -101,11 +101,11 @@ class CaptureInterceptor : Interceptor {
                 networkLog.responseContentLength = buffer.size()
             }
             NetworkCapture.insertNetworkLog(networkLog)
-            Log.e("NetworkInterceptor", networkLog.toString())
+            if (NetworkCapture.context!!.isPrintNetworkLog) LogHelper.printNetworkLog(networkLog)
             return response
         } catch (e: Exception) {
             networkLog.errorMsg = "$e"
-            Log.e("NetworkInterceptor", networkLog.toString())
+            if (NetworkCapture.context!!.isPrintNetworkLog) LogHelper.printNetworkLog(networkLog)
             NetworkCapture.insertNetworkLog(networkLog)
             throw e
         }

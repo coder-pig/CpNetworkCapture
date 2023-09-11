@@ -5,6 +5,7 @@ import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import cn.coderpig.cp_network_capture.R
 import cn.coderpig.cp_network_capture.databinding.ActivityConfigSettingBinding
+import cn.coderpig.cp_network_capture.utils.*
 import cn.coderpig.cp_network_capture.utils.binding
 import cn.coderpig.cp_network_capture.utils.isFoldRequestHeaders
 import cn.coderpig.cp_network_capture.utils.isFoldResponseHeaders
@@ -22,6 +23,7 @@ class ConfigSettingActivity : AppCompatActivity() {
             R.id.sw_network_capture -> isOpenNetworkCapture = isChecked
             R.id.sw_fold_request_headers -> isFoldRequestHeaders = isChecked
             R.id.sw_fold_response_headers -> isFoldResponseHeaders = isChecked
+            R.id.sw_print_network_log -> isPrintNetworkLog = isChecked
         }
     }
 
@@ -35,6 +37,8 @@ class ConfigSettingActivity : AppCompatActivity() {
             swFoldRequestHeaders.setOnCheckedChangeListener(mOnCheckedChangeListener)
             swFoldResponseHeaders.isChecked = isFoldResponseHeaders
             swFoldResponseHeaders.setOnCheckedChangeListener(mOnCheckedChangeListener)
+            swPrintNetworkLog.isChecked = isPrintNetworkLog
+            swPrintNetworkLog.setOnCheckedChangeListener(mOnCheckedChangeListener)
         }
     }
 }
