@@ -21,9 +21,7 @@ import cn.coderpig.cp_network_capture.utils.getResponseCodeColor
  */
 class ResponseInfoFragment : Fragment() {
     companion object {
-        fun newInstance(networkLog: NetworkLog) = ResponseInfoFragment().apply {
-            arguments = Bundle().apply { putSerializable(NetworkLogActivity.KEY_NETWORK_LOG, networkLog) }
-        }
+        fun newInstance() = ResponseInfoFragment()
     }
 
     private val mBinding by binding(FragmentResponseInfoBinding::bind)
@@ -34,7 +32,7 @@ class ResponseInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (arguments?.getSerializable(NetworkLogActivity.KEY_NETWORK_LOG) as? NetworkLog)?.let {
+        NetworkCapture.currentNetworkLog?.let {
             mBinding?.apply {
                 tvResponseCode.apply {
                     text = "${it.responseCode}"

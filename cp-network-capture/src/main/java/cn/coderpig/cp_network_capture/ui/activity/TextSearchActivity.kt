@@ -24,10 +24,6 @@ import java.util.regex.PatternSyntaxException
  * Desc: 文本查找页
  */
 class TextSearchActivity : AppCompatActivity() {
-    companion object {
-        const val SEARCH_TEXT = "search_text"
-    }
-
     private val mBinding by binding(ActivityTextSearchBinding::inflate)
     private var mOriginText: String? = null // 要查找的原始文本
     private var mLineRangeList: MutableList<Pair<Int, Int>> = arrayListOf()  // 存储每行文本的起始和结束下标
@@ -60,7 +56,7 @@ class TextSearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_search)
-        mOriginText = intent.getStringExtra(SEARCH_TEXT)
+        mOriginText = NetworkCapture.currentSearchText
         if (!mOriginText.isNullOrBlank()) {
             mLineRangeList = generateLineRangeList()
             mBinding.apply {

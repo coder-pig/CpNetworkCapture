@@ -34,9 +34,8 @@ class LongClickCopyTextView @JvmOverloads constructor(
     }
 
     override fun performLongClick(): Boolean {
-        (context as Activity).fly<TextSearchActivity>(bundle = Bundle().apply {
-            putString(TextSearchActivity.SEARCH_TEXT, text.toString())
-        })
+        NetworkCapture.currentSearchText = text.toString()
+        (context as Activity).fly<TextSearchActivity>()
         return true
     }
 }

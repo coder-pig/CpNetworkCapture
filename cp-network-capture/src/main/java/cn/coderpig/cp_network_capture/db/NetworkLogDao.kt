@@ -1,6 +1,7 @@
 package cn.coderpig.cp_network_capture.db
 
 import android.content.ContentValues
+import android.database.Cursor
 import android.net.Uri
 import cn.coderpig.cp_network_capture.entity.NetworkLog
 import cn.coderpig.cp_network_capture.provider.CpNetworkCaptureProvider
@@ -8,11 +9,11 @@ import cn.coderpig.cp_network_capture.provider.CpNetworkCaptureProvider
 /**
  * Author: zpj
  * Date: 2023-09-05 14:14
- * Desc:
+ * Desc: 请求日志Dao
  */
 class NetworkLogDao(private val db: NetworkLogDB) {
     companion object {
-        const val TABLE_NAME = "network_log"
+        const val TABLE_NAME = "network_log"    // 表名
 
         /**
          * 建表SQL语句
@@ -85,40 +86,24 @@ class NetworkLogDao(private val db: NetworkLogDB) {
         selection: String? = null,
         selectionArgs: Array<String>? = null
     ): ArrayList<NetworkLog> {
-        val logList = arrayListOf<NetworkLog>()
         val cursor = db.readableDatabase.query(
             TABLE_NAME, null, selection, selectionArgs, null, null, "id DESC", "${offset * limit},${limit}"
         )
-        if (cursor.moveToFirst()) {
-            do {
-                logList.add(NetworkLog().apply {
-                    id = cursor.getLong(0)
-                    method = cursor.getString(1)
-                    url = cursor.getString(2)
-                    scheme = cursor.getString(3)
-                    protocol = cursor.getString(4)
-                    host = cursor.getString(5)
-                    path = cursor.getString(6)
-                    duration = cursor.getLong(7)
-                    requestTime = cursor.getLong(8)
-                    requestHeaders = cursor.getString(9)
-                    requestBody = cursor.getString(10)
-                    requestContentType = cursor.getString(11)
-                    responseCode = cursor.getInt(12)
-                    responseTime = cursor.getLong(13)
-                    responseHeaders = cursor.getString(14)
-                    responseBody = cursor.getString(15)
-                    responseMessage = cursor.getString(16)
-                    responseContentType = cursor.getString(17)
-                    responseContentLength = cursor.getLong(18)
-                    errorMsg = cursor.getString(19)
-                    source = cursor.getString(20)
-
-                })
-            } while (cursor.moveToNext())
-        }
+        val logList = cursor.getNetworkLogList()
         cursor.close()
         return logList
+    }
+
+    /**
+     * 根据id查询记录
+     * */
+    fun queryNetworkLogById(id: Long): NetworkLog? {
+        val cursor = db.readableDatabase.query(
+            TABLE_NAME, null, "id=?", arrayOf("$id"), null, null, null, null
+        )
+        val logList = cursor.getNetworkLogList()
+        cursor.close()
+        return if (logList.isEmpty()) null else logList[0]
     }
 
     /**
@@ -134,5 +119,39 @@ class NetworkLogDao(private val db: NetworkLogDB) {
      * */
     fun clear() {
         db.writableDatabase.delete(TABLE_NAME, null, null)
+    }
+
+    /**
+     * 遍历游标获取请求日志列表的方法
+     * */
+    private fun Cursor.getNetworkLogList() = arrayListOf<NetworkLog>().apply {
+        if (moveToFirst()) {
+            do {
+                add(NetworkLog().apply {
+                    id = getLong(0)
+                    method = getString(1)
+                    url = getString(2)
+                    scheme = getString(3)
+                    protocol = getString(4)
+                    host = getString(5)
+                    path = getString(6)
+                    duration = getLong(7)
+                    requestTime = getLong(8)
+                    requestHeaders = getString(9)
+                    requestBody = getString(10)
+                    requestContentType = getString(11)
+                    responseCode = getInt(12)
+                    responseTime = getLong(13)
+                    responseHeaders = getString(14)
+                    responseBody = getString(15)
+                    responseMessage = getString(16)
+                    responseContentType = getString(17)
+                    responseContentLength = getLong(18)
+                    errorMsg = getString(19)
+                    source = getString(20)
+
+                })
+            } while (moveToNext())
+        }
     }
 }

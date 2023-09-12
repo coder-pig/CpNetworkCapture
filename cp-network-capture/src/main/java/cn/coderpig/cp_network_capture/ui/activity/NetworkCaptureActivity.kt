@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.coderpig.cp_network_capture.R
 import cn.coderpig.cp_network_capture.databinding.ActivityNetworkCaptureBinding
-import cn.coderpig.cp_network_capture.ui.activity.NetworkLogActivity.Companion.KEY_NETWORK_LOG
 import cn.coderpig.cp_network_capture.ui.adapter.NetworkLogAdapter
 import cn.coderpig.cp_network_capture.utils.binding
 import cn.coderpig.cp_network_capture.utils.fly
@@ -65,7 +64,8 @@ class NetworkCaptureActivity : AppCompatActivity() {
                 layoutManager = LinearLayoutManager(this@NetworkCaptureActivity)
                 mAdapter = NetworkLogAdapter().apply {
                     setOnItemClick {
-                        fly<NetworkLogActivity>(bundle = Bundle().apply { putSerializable(KEY_NETWORK_LOG, it) })
+                        NetworkCapture.currentNetworkLog = it
+                        fly<NetworkLogActivity>()
                     }
                 }
                 adapter = mAdapter

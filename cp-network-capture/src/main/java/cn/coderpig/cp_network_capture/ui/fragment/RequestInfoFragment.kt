@@ -1,5 +1,6 @@
 package cn.coderpig.cp_network_capture.ui.fragment
 
+import NetworkCapture
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import cn.coderpig.cp_network_capture.R
 import cn.coderpig.cp_network_capture.databinding.FragmentRequestInfoBinding
-import cn.coderpig.cp_network_capture.entity.NetworkLog
-import cn.coderpig.cp_network_capture.ui.activity.NetworkLogActivity.Companion.KEY_NETWORK_LOG
 import cn.coderpig.cp_network_capture.utils.*
-import cn.coderpig.cp_network_capture.utils.binding
-import cn.coderpig.cp_network_capture.utils.generateHeaderView
 
 /**
  * Author: zpj
@@ -20,9 +17,7 @@ import cn.coderpig.cp_network_capture.utils.generateHeaderView
  */
 class RequestInfoFragment : Fragment() {
     companion object {
-        fun newInstance(networkLog: NetworkLog) = RequestInfoFragment().apply {
-            arguments = Bundle().apply { putSerializable(KEY_NETWORK_LOG, networkLog) }
-        }
+        fun newInstance() = RequestInfoFragment()
     }
 
     private val mBinding by binding(FragmentRequestInfoBinding::bind)
@@ -33,7 +28,7 @@ class RequestInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (arguments?.getSerializable(KEY_NETWORK_LOG) as? NetworkLog)?.let {
+        NetworkCapture.currentNetworkLog?.let {
             mBinding?.apply {
                 tvRequestUrl.text = it.url
                 tvRequestMethod.text = it.method

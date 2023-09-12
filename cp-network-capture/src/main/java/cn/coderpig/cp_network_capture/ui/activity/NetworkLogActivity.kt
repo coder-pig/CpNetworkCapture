@@ -16,10 +16,6 @@ import cn.coderpig.cp_network_capture.utils.binding
  * Desc: 请求日志页
  */
 class NetworkLogActivity : AppCompatActivity() {
-    companion object {
-        const val KEY_NETWORK_LOG = "network_log"
-    }
-
     private val mBinding by binding(ActivityNetworkLogBinding::inflate)
     private lateinit var mPageAdapter: NetworkLogPagerAdapter
 
@@ -27,10 +23,10 @@ class NetworkLogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_network_log)
         mBinding.apply {
-            (intent.getSerializableExtra(KEY_NETWORK_LOG) as NetworkLog?)?.let {
+            NetworkCapture.currentNetworkLog?.let {
                 mPageAdapter = NetworkLogPagerAdapter(supportFragmentManager).apply {
-                    addFragment(RequestInfoFragment.newInstance(it), "请求")
-                    addFragment(ResponseInfoFragment.newInstance(it), "响应")
+                    addFragment(RequestInfoFragment.newInstance(), "请求")
+                    addFragment(ResponseInfoFragment.newInstance(), "响应")
                 }
                 vpContent.adapter = mPageAdapter
                 tlContent.setupWithViewPager(vpContent)
