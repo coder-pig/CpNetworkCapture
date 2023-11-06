@@ -77,8 +77,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/font_v2"
                     android:text="无"
+                    android:textColor="@color/font_v2"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -93,12 +93,12 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <cn.coderpig.cp_network_capture.ui.widget.LongClickCopyTextView
                 android:id="@+id/tv_request_body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/font_v2"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:textColor="@color/font_v2" />
 
 
         </LinearLayout>
@@ -113,8 +113,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="30dp"
-        android:src="@mipmap/ic_to_top"
         android:background="@color/to_top_pink"
+        android:src="@mipmap/ic_to_top"
         android:visibility="gone"
         tools:ignore="ContentDescription" />
 
