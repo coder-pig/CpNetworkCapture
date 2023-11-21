@@ -42,12 +42,16 @@ class TextSearchActivity : AppCompatActivity() {
                     searchMatchText()
                 }
                 tvNextMatch -> {
-                    if (mCurMatchPos >= mMatchRangeList.size - 1) mCurMatchPos = 0 else mCurMatchPos++
-                    scrollToTargetLine()
+                    if (!mMatchRangeList.isNullOrEmpty()) {
+                        if (mCurMatchPos >= mMatchRangeList.size - 1) mCurMatchPos = 0 else mCurMatchPos++
+                        scrollToTargetLine()
+                    }
                 }
                 tvPreviousMatch -> {
-                    if (mCurMatchPos <= 0) mCurMatchPos = mMatchRangeList.size - 1 else mCurMatchPos--
-                    scrollToTargetLine()
+                    if (!mMatchRangeList.isNullOrEmpty()) {
+                        if (mCurMatchPos <= 0) mCurMatchPos = mMatchRangeList.size - 1 else mCurMatchPos--
+                        scrollToTargetLine()
+                    }
                 }
             }
         }
